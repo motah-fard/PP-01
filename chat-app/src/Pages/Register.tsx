@@ -40,6 +40,7 @@ const Register = () => {
               email,
               photoURL: downloadURL,
             });
+
             await setDoc(doc(db, "userChats", res.user.uid), {});
           } catch (err) {
             console.log(err);

@@ -29,7 +29,7 @@ const Login = () => {
       setErr(true);
       console.log(err);
     }
-    navigate("/")
+
   };
   return (
     <div className="formContainer">
