@@ -1,31 +1,39 @@
 
 import React, { useContext, useEffect, useState } from "react";
-// import { AuthContext } from "../context/AuthContext";
-// import { ChatContext } from "../context/ChatContext";
-// import { db } from "../firebase";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
+import { db } from "../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const Chats = () => {
-  const [chats, setChats] = useState([]);
+  // type AnyArray = any[];
+  interface AnyArray {
+    [index: number]: any;
+  }
+  interface User {
+    [key: string]: any;
+  }
+  const [chats, setChats] = useState( );
 
-  // const { currentUser } = useContext(AuthContext);
-  // const { dispatch } = useContext(ChatContext);
+  const { currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
 
   useEffect(() => {
     const getChats = () => {
-      // const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), () => {
-      //   setChats(doc.data());
-      // });
+      const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), () => {
+        setChats(doc.data());
+      });
 
-      // return () => {
-      //   unsub();
-      // };
+      return () => {
+        unsub();
+      };
     };
 
-    // currentUser.uid && getChats();
+    currentUser.uid && getChats();
   }, []);
 
   const handleSelect = () => {
-    // dispatch({ type: "CHANGE_USER", payload:  });
+    dispatch({ type: "CHANGE_USER", payload:  });
   };
 
   return (
@@ -33,8 +41,8 @@ const Chats = () => {
       { (
         <div
           className="userChat"
-          // key={chat[0]}
-          // onClick={() => handleSelect(chat[1].userInfo)}
+          key={chat[0]}
+          onClick={() => handleSelect(chat[1].userInfo)}
         >
            
         <img
